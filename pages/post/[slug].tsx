@@ -1,9 +1,11 @@
 import { getPostFromSlug, getSlugs } from '../../lib/api';
 import { serialize } from 'next-mdx-remote/serialize'
 import { MDXRemote } from 'next-mdx-remote'
+import { GetStaticProps } from 'next';
+import { ParsedUrlQuery } from 'querystring';
 
 
-const Blog = ({posts}) => {
+const Blog = ({posts}:any) => {
     // console.log(posts.meta,posts.source)
     return (
         <div className='flex flex-col items-center space-y-8 my-20'>
@@ -21,7 +23,7 @@ const Blog = ({posts}) => {
 
 export default Blog;
 
-export const getStaticPaths = ({params})=>{
+export const getStaticPaths = ()=>{
     const paths = getSlugs().map(slug=>({params:{slug}}))
     return {
         paths,
@@ -29,7 +31,7 @@ export const getStaticPaths = ({params})=>{
     }
 }
 
-export const getStaticProps = async({params})=>{
+export const getStaticProps = async({params}:{params: ParsedUrlQuery | undefined})=>{
     const {slug} = params
     const {content,meta} = getPostFromSlug(slug)
 
