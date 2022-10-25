@@ -5,7 +5,7 @@ import { GetStaticProps } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 
 
-const Blog = ({posts}:any) => {
+const Blog = ({posts}) => {
     // console.log(posts.meta,posts.source)
     return (
         <div className='flex flex-col items-center space-y-8 my-20'>
@@ -31,7 +31,7 @@ export const getStaticPaths = ()=>{
     }
 }
 
-export const getStaticProps = async({params}:{params: ParsedUrlQuery | undefined})=>{
+export const getStaticProps = async({params})=>{
     const {slug} = params
     const {content,meta} = getPostFromSlug(slug)
 
